@@ -1,0 +1,148 @@
+version: "2"
+linters:
+  default: none
+  disable:
+    - dupl
+    - err113
+    - exhaustruct
+  enable:
+    - asasalint
+    - asciicheck
+    - bidichk
+    - bodyclose
+    - containedctx
+    - contextcheck
+    - copyloopvar
+    - cyclop
+    - decorder
+    - dupword
+    - errname
+    - errorlint
+    - exhaustive
+    - exptostd
+    - fatcontext
+    - forbidigo
+    - forcetypeassert
+    - funcorder
+    - funlen
+    - gocheckcompilerdirectives
+    - gochecknoglobals
+    - gochecknoinits
+    - gochecksumtype
+    - gocognit
+    - goconst
+    - gocyclo
+    - gocritic
+    - godox
+    - goheader
+    - gomoddirectives
+    - gosec
+    - grouper
+    - iface
+    - importas
+    - inamedparam
+    - interfacebloat
+    - ireturn
+    - lll
+    - maintidx
+    - misspell
+    - mnd
+    - musttag
+    - nakedret
+    - nestif
+    - nilnil
+    - perfsprint
+    - prealloc
+    - predeclared
+    - revive
+    - testifylint
+    - usestdlibvars
+    - usetesting
+    - unconvert
+    - unparam
+    - unused
+    - whitespace
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+    - wrapcheck
+>>>>>>> 8a68686 (chore: add linter config)
+=======
+>>>>>>> d3389f5 (chore: exclude wrap check linter)
+  settings:
+    cyclop:
+      max-complexity: 15
+    misspell:
+<<<<<<< HEAD
+      locale: UK
+=======
+      locale: US
+>>>>>>> 8a68686 (chore: add linter config)
+    revive:
+      severity: warning
+      enable-all-rules: true
+      rules:
+        - name: add-constant
+          exclude:
+            - '**/*.go'
+        - name: line-length-limit
+          arguments: [ 120 ]
+    wrapcheck:
+      ignore-package-globs:
+        - '**/mock'
+        - '**/*_test'
+  exclusions:
+    warn-unused: true
+    generated: strict
+formatters:
+  enable:
+    - gci
+    - gofmt
+    - gofumpt
+    - goimports
+    - golines
+  settings:
+    gci:
+      sections:
+        - standard
+        - default
+        - localmodule
+        - alias
+        - blank
+      no-inline-comments: true
+      no-prefix-comments: true
+    gofmt:
+      rewrite-rules:
+        - pattern: interface{}
+          replacement: any
+        - pattern: a[b:len(a)]
+          replacement: a[b:]
+    golines:
+      tab-len: 4
+      max-len: 120
+      chain-split-dots: true
+      shorten-comments: false
+issues:
+  max-issues-per-linter: 10
+  max-same-issues: 3
+output:
+  formats:
+    text:
+      path: stdout
+      print-linter-name: true
+      print-issued-lines: true
+      colors: true
+  sort-order:
+    - severity
+    - linter
+    - file
+  show-stats: true
+run:
+  timeout: 3m
+  relative-path-mode: gomod
+  tests: false
+  modules-download-mode: readonly
+  allow-parallel-runners: false
+  allow-serial-runners: false
+  go: 1.24.4
+  concurrency: 4
