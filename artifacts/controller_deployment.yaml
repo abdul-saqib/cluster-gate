@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: expose-controller
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: expose-controller
+  template:
+    metadata:
+      labels:
+        app: expose-controller
+    spec:
+      serviceAccountName: expose-controller-sa
+      containers:
+      - name: controller
+        image: localhost/expose-controller:latest
+        imagePullPolicy: IfNotPresent
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "250m"
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
