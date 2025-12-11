@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: expose-controller-sa
+  namespace: default
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: expose-controller-role
+rules:
+  - apiGroups: [""]
+    resources: ["services"]
+    verbs: ["get","list","watch","create","update","patch","delete"]
+  - apiGroups: ["apps"]
+    resources: ["deployments"]
+    verbs: ["get","list","watch"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: expose-controller-binding
+subjects:
+- kind: ServiceAccount
+  name: expose-controller-sa
+  namespace: default
+roleRef:
+  kind: ClusterRole
+  name: expose-controller-role
+  apiGroup: rbac.authorization.k8s.io
